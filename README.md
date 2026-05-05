@@ -97,6 +97,25 @@ From Android Studio:
 - Output file:
   - `app/build/outputs/apk/release/app-release.apk`
 
+## Troubleshooting Build Failures
+
+If you see:
+
+- `Plugin [id: 'com.android.application', version: '8.5.2'] was not found`
+
+it means Gradle could not download the Android Gradle Plugin from remote repositories.
+
+What to check:
+
+1. verify internet/DNS:
+   - `curl -I https://dl.google.com`
+   - `curl -I https://repo.maven.apache.org`
+2. if you use a proxy, export it before build:
+   - `export HTTPS_PROXY=http://<host>:<port>`
+   - `export HTTP_PROXY=http://<host>:<port>`
+3. retry with details:
+   - `gradle wrapper --refresh-dependencies --stacktrace`
+
 ## Safety Notes
 
 - Always test with wheels raised/off-ground before real driving.

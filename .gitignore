@@ -5,6 +5,7 @@ local.properties
 captures/
 .idea/
 *.iml
+.kotlin/
 *.apk
 *.aab
 *.jks
