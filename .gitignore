@@ -5,6 +5,11 @@ local.properties
 captures/
 .idea/
 *.iml
+*.apk
+*.aab
+*.jks
+*.keystore
+keystore.properties
 
 # OS/editor
 .DS_Store

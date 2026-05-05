@@ -110,3 +110,15 @@ From Android Studio:
 git remote add origin https://github.com/<your-username>/Smart_Wheelchair.git
 git push -u origin main
 ```
+
+## Maintenance Rule
+
+This project follows a simple maintenance rule:
+
+- keep `.gitignore` updated whenever new generated files or secrets appear
+- keep `README.md` updated whenever setup steps, architecture, or behavior changes
+
+Why this matters:
+
+- avoids committing build artifacts and credentials
+- keeps onboarding and deployment steps accurate
