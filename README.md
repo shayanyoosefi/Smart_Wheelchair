@@ -49,8 +49,9 @@ The system is designed so the Android app connects directly to the ESP32 over Wi
 
 - ESP32 board (with your connected wheelchair hardware, LCD, RFID, keypad, buzzer as wired in firmware)
 - Arduino IDE (or PlatformIO) with required libraries for the firmware
-- Android Studio (latest stable recommended)
+- Android SDK command-line tools (or Android Studio)
 - Android phone connected to ESP32 Wi-Fi AP
+- JDK 17 or JDK 21 (recommended for Android Gradle Plugin compatibility)
 
 ## Flash Firmware (`WheelchairRFID.ino`)
 
@@ -75,6 +76,17 @@ The system is designed so the Android app connects directly to the ESP32 over Wi
    - SSID: `Wheelchair_CTRL`
    - Password: `wheelchair123`
 6. Return to app and test controls.
+
+## CLI Build (No Android Studio)
+
+1. Ensure Java is set to JDK 17 or 21:
+   - `java -version`
+2. Generate or refresh wrapper:
+   - `gradle wrapper`
+3. Build debug APK:
+   - `./gradlew assembleDebug`
+4. Output APK:
+   - `app/build/outputs/apk/debug/app-debug.apk`
 
 ## Generate APK
 
@@ -101,7 +113,7 @@ From Android Studio:
 
 If you see:
 
-- `Plugin [id: 'com.android.application', version: '8.5.2'] was not found`
+- `Plugin [id: 'com.android.application', version: '8.8.2'] was not found`
 
 it means Gradle could not download the Android Gradle Plugin from remote repositories.
 
@@ -115,6 +127,21 @@ What to check:
    - `export HTTP_PROXY=http://<host>:<port>`
 3. retry with details:
    - `gradle wrapper --refresh-dependencies --stacktrace`
+
+## Toolchain Baseline (Migration Path)
+
+The Android project has been migrated to a newer baseline:
+
+- Android Gradle Plugin: `8.8.2`
+- Kotlin: `2.0.21`
+- Gradle wrapper distribution: `8.10.2`
+- Compile/Target SDK: `35`
+
+Why this baseline:
+
+- modern but stable Android toolchain
+- better compatibility with current Compose and dependency versions
+- cleaner path for future upgrades
 
 ## Safety Notes
 
