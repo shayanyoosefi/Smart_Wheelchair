@@ -113,7 +113,7 @@ From Android Studio:
 
 If you see:
 
-- `Plugin [id: 'com.android.application', version: '8.8.2'] was not found`
+- `Plugin [id: 'com.android.application', version: '8.5.2'] was not found`
 
 it means Gradle could not download the Android Gradle Plugin from remote repositories.
 
@@ -122,26 +122,31 @@ What to check:
 1. verify internet/DNS:
    - `curl -I https://dl.google.com`
    - `curl -I https://repo.maven.apache.org`
-2. if you use a proxy, export it before build:
+   - `curl -I https://maven.google.com`
+2. verify AGP artifact path:
+   - `curl -I https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.5.2/gradle-8.5.2.pom`
+   - `curl -I https://maven.google.com/com/android/tools/build/gradle/8.5.2/gradle-8.5.2.pom`
+3. if you use a proxy, export it before build:
    - `export HTTPS_PROXY=http://<host>:<port>`
    - `export HTTP_PROXY=http://<host>:<port>`
-3. retry with details:
+4. retry with details:
    - `gradle wrapper --refresh-dependencies --stacktrace`
 
-## Toolchain Baseline (Migration Path)
+## Toolchain Baseline
 
-The Android project has been migrated to a newer baseline:
+The Android project currently uses a conservative stable baseline:
 
-- Android Gradle Plugin: `8.8.2`
-- Kotlin: `2.0.21`
-- Gradle wrapper distribution: `8.10.2`
-- Compile/Target SDK: `35`
+- Android Gradle Plugin: `8.5.2`
+- Kotlin: `1.9.24`
+- Gradle wrapper distribution: `8.7`
+- Compile/Target SDK: `34`
+- Gradle JVM: JDK `21` (set via `org.gradle.java.home`)
 
 Why this baseline:
 
-- modern but stable Android toolchain
-- better compatibility with current Compose and dependency versions
-- cleaner path for future upgrades
+- avoids Java 25/26 parsing issues seen in Kotlin/Gradle scripts
+- proven compatibility for CLI builds without Android Studio
+- easier to move forward once artifact resolution is stable
 
 ## Safety Notes
 

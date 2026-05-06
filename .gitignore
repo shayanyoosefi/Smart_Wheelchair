@@ -4,6 +4,7 @@ local.properties
 **/build/
 captures/
 .idea/
+.idea/**/workspace.xml
 *.iml
 .kotlin/
 *.apk
